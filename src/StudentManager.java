@@ -32,15 +32,37 @@ public class StudentManager {
         System.out.println("Student not found.");
     }
 
-    // Sort by GPA descending
+    // Sort students by CGPA in descending order using selection sort
     public void sortByGrade() {
-        studentList.sort(Comparator.comparingDouble(Student::calculateGrade).reversed());
-        System.out.println("Sorted by grade.");
+        for (int i = 0; i < studentList.size() - 1; i++) {
+            int maxIndex = i;
+            for (int j = i + 1; j < studentList.size(); j++) {
+                if (studentList.get(j).calculateGrade() > studentList.get(maxIndex).calculateGrade()) {
+                    maxIndex = j;
+                }
+            }
+            // Swap students at i and maxIndex
+            Student temp = studentList.get(i);
+            studentList.set(i, studentList.get(maxIndex));
+            studentList.set(maxIndex, temp);
+        }
+        System.out.println("Sorted by grade (CGPA).");
     }
 
-    // Sort by highest mark
+    // Sort students by highest mark/GPA in descending order using selection sort
     public void sortByHighestMark() {
-        studentList.sort((a, b) -> Double.compare(b.getHighestMark(), a.getHighestMark()));
+        for (int i = 0; i < studentList.size() - 1; i++) {
+            int maxIndex = i;
+            for (int j = i + 1; j < studentList.size(); j++) {
+                if (studentList.get(j).getHighestMark() > studentList.get(maxIndex).getHighestMark()) {
+                    maxIndex = j;
+                }
+            }
+            // Swap students at i and maxIndex
+            Student temp = studentList.get(i);
+            studentList.set(i, studentList.get(maxIndex));
+            studentList.set(maxIndex, temp);
+        }
         System.out.println("Sorted by highest mark.");
     }
 
